@@ -62,8 +62,8 @@ NBSRC_EXTRA_posix=''
 
 NBSRC_EXTRA_usr=''
 
-GITREPO='https://github.com/rumpkernel/src-netbsd'
-GITREPOPUSH='git@github.com:rumpkernel/src-netbsd'
+GITREPO='https://github.com/huikang/src-netbsd'
+GITREPOPUSH='https://github.com/huikang/src-netbsd'
 GITREVFILE='.srcgitrev'
 
 checkoutcvs ()
@@ -265,6 +265,9 @@ githubdate ()
 	${GIT} checkout all-src
 	${GIT} merge --no-edit kernel-src user-src posix-src
 
+	${GIT} checkout add-tun
+	${GIT} merge --no-edit kernel-src user-src
+
 	# buildrump-src revision gets embedded in buildrump.sh
 	${GIT} checkout buildrump-src
 	${GIT} merge --no-edit kernel-src posix-src
@@ -365,6 +368,7 @@ if [ -z "${BUILDRUMP_CVSROOT}" ]; then
 		BUILDRUMP_CVSROOT=:pserver:anoncvs@anoncvs.netbsd.org:/cvsroot
 		;;
 	esac
+	BUILDRUMP_CVSROOT=:pserver:anoncvs@anoncvs.netbsd.org:/cvsroot
 fi
 
 case "${1}" in
